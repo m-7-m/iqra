@@ -5,28 +5,34 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 import 'package:iqra/controllers/app_bindings.dart';
 import 'package:iqra/controllers/nav_controller.dart';
+import 'package:iqra/controllers/theme_controller.dart';
 import 'package:iqra/screens/home.dart';
+import 'package:iqra/screens/marks.dart';
+import 'package:iqra/screens/search.dart';
 import 'package:iqra/screens/settings.dart';
 import 'package:iqra/widgets/navbar.dart';
 
 void main() async {
   Intl.defaultLocale = 'ar_EG';
   await GetStorage.init();
+  ThemeController themeController = Get.put(ThemeController());
   runApp(
-    GetMaterialApp(
-      debugShowCheckedModeBanner: false,
-      locale: const Locale('ar'),
-      theme: ThemeData(
-        useMaterial3: true,
-        textTheme: GoogleFonts.amiriTextTheme(),
-        colorScheme: ColorScheme.fromSeed(
-          seedColor: Colors.lightBlueAccent,
-          brightness: Brightness.light,
+    Obx(
+      () => GetMaterialApp(
+        debugShowCheckedModeBanner: false,
+        locale: const Locale('ar'),
+        theme: ThemeData(
+          useMaterial3: true,
+          textTheme: GoogleFonts.amiriTextTheme(),
+          colorScheme: ColorScheme.fromSeed(
+            seedColor: Color(themeController.currentTheme.value),
+            brightness: Brightness.light,
+          ),
         ),
+        themeMode: ThemeMode.light,
+        initialBinding: AppBindings(),
+        home: MyApp(),
       ),
-      themeMode: ThemeMode.light,
-      initialBinding: AppBindings(),
-      home: MyApp(),
     ),
   );
 }
@@ -46,7 +52,12 @@ class _MyAppState extends State<MyApp> {
       body: Obx(
         () => IndexedStack(
           index: navController.index.value,
-          children: [HomeScreen(), SettingsScreen()],
+          children: [
+            HomeScreen(),
+            MarksScreen(),
+            SearchScreen(),
+            SettingsScreen(),
+          ],
         ),
       ),
       bottomNavigationBar: Navbar(),

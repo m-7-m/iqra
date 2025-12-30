@@ -25,7 +25,7 @@ class _ReadScreenState extends State<ReadScreen> {
     if (widget.startPage != null) {
       _controller = PageController(initialPage: widget.startPage! - 1);
     } else {
-      _controller = PageController(initialPage: markController.mark.value - 1);
+      _controller = PageController(initialPage: markController.mark.last - 1);
     }
   }
 
@@ -41,10 +41,9 @@ class _ReadScreenState extends State<ReadScreen> {
             int surahNumber = quran.getPageData(pageNumber)[0]['surah'];
             int verseNumber = quran.getPageData(pageNumber)[0]['end'];
             int juzNumber = quran.getJuzNumber(surahNumber, verseNumber);
-            return Container(
+            return SizedBox(
               width: double.infinity,
               height: double.infinity,
-              decoration: BoxDecoration(color: Colors.lightBlueAccent[50]),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 crossAxisAlignment: CrossAxisAlignment.center,
@@ -61,9 +60,11 @@ class _ReadScreenState extends State<ReadScreen> {
                       Obx(
                         () => IconButton(
                           onPressed: () {
-                            markController.setMark(pageNumber);
+                            markController.mark.contains(pageNumber)
+                                ? markController.removeMark(pageNumber)
+                                : markController.setMark(pageNumber);
                           },
-                          icon: markController.mark.value == pageNumber
+                          icon: markController.mark.contains(pageNumber)
                               ? Icon(Icons.bookmark)
                               : Icon(Icons.bookmark_outline),
                         ),
