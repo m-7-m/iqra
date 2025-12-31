@@ -1,16 +1,22 @@
-# iqra
+# Iqra
 
-A new Flutter project.
+An open-source Quran app for Android built with Flutter.
 
-## Getting Started
+## Features
 
-This project is a starting point for a Flutter application.
+- Read the Quran by Surah or by Juz.
+- Search for a specific Surah or Ayah.
+- Bookmarks for Pages.
+- Themes: gold, green, ligthblue.
 
-A few resources to get you started if this is your first Flutter project:
+## Technologies Used
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+- [Flutter](https://flutter.dev/)
+- [GetX](https://pub.dev/packages/get) for state management.
+- [GetStorage](https://pub.dev/packages/get_storage) for local storage.
+- [quran](https://pub.dev/packages/quran) package for Quran data.
+- [Quran Images](https://github.com/BetimShala/quran-images-api) for Quran images.
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## Contributing
+
+Contributions are welcome! If you have any ideas, suggestions, or bug reports, please open an issue or create a pull request.
